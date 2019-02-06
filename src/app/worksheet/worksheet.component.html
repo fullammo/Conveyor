@@ -1,19 +1,43 @@
+<button *ngIf="this.zeroIncomeColumDisplayed; else zeroColumnNotDisplayed" mat-raised-button (click)="addIncomeColumn(this.zeroIncomeColumnName)">0% Oszlop Hozzáadása</button>
+<ng-template #zeroColumnNotDisplayed>
+  <button mat-raised-button (click)="removeIncomeColumn(this.zeroIncomeColumnName)">0% Oszlop Eltávolítása</button>
+</ng-template>
+
+<button *ngIf="this.fiveIncomeColumnDisplayed; else fiveColumnNotDisplayed" mat-raised-button (click)="addIncomeColumn(this.fiveIncomeColumnName)">5% Oszlop Hozzáadása</button>
+<ng-template #fiveColumnNotDisplayed>
+  <button mat-raised-button (click)="removeIncomeColumn(this.fiveIncomeColumnName)">5% Oszlop Eltávolítása</button>
+</ng-template>
+
+<button *ngIf="this.eighteenIncomeColumnDisplayed; else eighteenColumnNotDisplayed" mat-raised-button (click)="addIncomeColumn(this.eighteenIncomeColumnName)">18% Oszlop Hozzáadása</button>
+<ng-template #eighteenColumnNotDisplayed>
+  <button mat-raised-button (click)="removeIncomeColumn(this.eighteenIncomeColumnName)">18% Oszlop Eltávolítása</button>
+</ng-template>
+
+<button *ngIf="this.twentySevenIncomeColumnDisplayed; else twentySevenColumnNotDisplayed" mat-raised-button (click)="addIncomeColumn(this.twentySevenIncomeColumnName)">27% Oszlop Hozzáadása</button>
+<ng-template #twentySevenColumnNotDisplayed>
+  <button mat-raised-button (click)="removeIncomeColumn(this.twentySevenIncomeColumnName)">27% Oszlop Eltávolítása</button>
+</ng-template>
+
 <table mat-table [dataSource]="workSheetItems" class="mat-elevation-z8">
   <!-- Nap oszlop -->
   <ng-container matColumnDef="Nap">
-    <th mat-header-cell *matHeaderCellDef> Nap </th>
-    <td mat-cell *matCellDef="let worksheetItem"> {{worksheetItem.actualDay}} </td>
-    <td mat-footer-cell *matFooterCellDef> Összesen </td>
+    <th mat-header-cell *matHeaderCellDef>Nap</th>
+    <td mat-cell *matCellDef="let worksheetItem">
+      {{ worksheetItem.actualDay }}
+    </td>
+    <td mat-footer-cell *matFooterCellDef>Összesen</td>
   </ng-container>
 
   <!-- Pénztárgép oszlop -->
   <ng-container matColumnDef="Pt.gép">
-    <th mat-header-cell *matHeaderCellDef> Pt.gép </th>
-    <td mat-cell *matCellDef="let worksheetItem"> {{worksheetItem.cashierNumber}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
+    <th mat-header-cell *matHeaderCellDef>Pt.gép</th>
+    <td mat-cell *matCellDef="let worksheetItem">
+      {{ worksheetItem.cashierNumber }}
+    </td>
+    <td mat-footer-cell *matFooterCellDef>{{ getTotalCost() }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>

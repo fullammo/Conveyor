@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkSheetItem } from '../models/worksheet';
-import { MomentService } from '../providers/Moment.service';
+import { MomentService } from '../providers/moment.service';
 
 const EXAMPLE_DATA: WorkSheetItem[] = [
   { actualDay: 1, cashierNumber: 1 },
@@ -33,18 +33,56 @@ const EXAMPLE_DATA: WorkSheetItem[] = [
 export class WorksheetComponent implements OnInit {
   workSheetItems: WorkSheetItem[] = EXAMPLE_DATA;
 
+  readonly zeroIncomeColumnName: string = 'Bevétel 0%';
+  readonly fiveIncomeColumnName: string = 'Bevétel 5%';
+  readonly eighteenIncomeColumnName: string = 'Bevétel 18%';
+  readonly twentySevenIncomeColumnName: string = 'Bevétel 27%';
+
+  public zeroIncomeColumDisplayed = true;
+  public fiveIncomeColumnDisplayed = true;
+  public eighteenIncomeColumnDisplayed = true;
+  public twentySevenIncomeColumnDisplayed = true;
+
   constructor(private momentService: MomentService) {}
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = [
+  displayedColumns: string[] = [
     'Nap',
-    'Pt.gép'
-    // 'Bevétel 5%',
-    // 'Bevétel 18%',
-    // 'Bevétel 27%'
+    'Pt.gép' //,
+    // this.zeroIncomeColumnName,
+    // this.fiveIncomeColumnName,
+    // this.eighteenIncomeColumnName,
+    // this.twentySevenIncomeColumnName
   ];
 
-  ngOnInit() {}
+  columnsToDisplay: string[] = this.displayedColumns.slice();
+
+  addIncomeColumn(columnName: string): void {
+    // this.columnsToDisplay.push(columnName);
+    this.toggleDisplayStatus(columnName);
+  }
+
+  removeIncomeColumn(columnName: string): void {
+    // this.columnsToDisplay = this.columnsToDisplay.filter(
+    //   column => column !== columnName
+    // );
+    this.toggleDisplayStatus(columnName);
+  }
+
+  toggleDisplayStatus(columnName: string): void {
+    switch (columnName) {
+      case this.zeroIncomeColumnName:
+        this.zeroIncomeColumDisplayed = !this.zeroIncomeColumDisplayed;
+        break;
+      case this.fiveIncomeColumnName:
+        this.fiveIncomeColumnDisplayed = !this.fiveIncomeColumnDisplayed;
+        break;
+    }
+  }
+
+  ngOnInit() {
+    console.log(this.momentService.getNow());
+  }
 
   getTotalCost() {
     return this.workSheetItems

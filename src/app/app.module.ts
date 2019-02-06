@@ -17,7 +17,7 @@ import {
   MatSortModule
 } from '@angular/material';
 import { WorksheetComponent } from './worksheet/worksheet.component';
-import { MomentService } from './providers/Moment.service';
+import { MomentService } from './providers/moment.service';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, WorksheetComponent],

@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { MomentService } from './moment.service';
+import { MomentService } from './Moment.service';
 
 describe('Service: Moment', () => {
   beforeEach(() => {
